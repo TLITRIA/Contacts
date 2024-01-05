@@ -3,8 +3,8 @@
 
 // ┏ ┓ ┛ ┗ ┻ ┳ ━ ┃
 
-/* ===========状态码============ */
-enum STATUS_CODE
+/* ===========报错码============ */
+enum ERROR_CODE
 {
     NOT_FIND = -4,
     INVALID_ACCESS,
@@ -12,6 +12,12 @@ enum STATUS_CODE
     MALLOC_ERROR,
     ON_SUCCESS,
 };
+
+// /* =============程序执行码============= */
+// enum 
+
+
+
 
 /* ===========宏定义和宏函数=========== */
 #define START_POS 0/* todo */
