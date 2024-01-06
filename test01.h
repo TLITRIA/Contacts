@@ -36,14 +36,14 @@ int contactsInit(Contacts **pContacts,
 /* 添加联系人 */
 int contactsAdd(Contacts *pContacts, ELEMENTTYPE val);
 
+/* 根据指定的号码获取通讯录的结点 */
+Person * contactsSearchAppointNumber(Contacts *pContacts, ELEMENTTYPE compareNode);
+
 /* 删除联系人--指定号码 */
-int contactsDelAppointNumber(Contacts *pContacts, int delPhoneNumber);
+int contactsDelAppointNumber(Contacts *pContacts, ELEMENTTYPE compareNode);
 
 /* 修改联系人--指定号码 */
-int contactsModAppointNumber(Contacts *pContacts, int delPhoneNumber, ELEMENTTYPE val);
-
-/* 查询联系人--指定号码 */
-int contactsSearchAppointNumber(Contacts *pContacts, int delPhoneNumber);
+int contactsModAppointNumber(Contacts *pContacts, ELEMENTTYPE compareNode, ELEMENTTYPE val);
 
 /* 打印通讯录 */
 int contactsPrintAll(Contacts *pContacts);

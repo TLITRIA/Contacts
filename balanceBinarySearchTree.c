@@ -97,7 +97,7 @@ int balanceBinarySearchTreeInit(BalanceBinarySearchTree **pBstree, int (*compare
         bstree->root->parent = NULL;
     }
     #else
-    bstree->root = createAVLTreeNewNode(0, NULL);
+    bstree->root = createAVLTreeNewNode(NULL, NULL); // 修改初始值
     if (bstree->root == NULL)
     {
         return MALLOC_ERROR;

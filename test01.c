@@ -51,46 +51,79 @@ int printMenu(void)
     printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
     return ON_SUCCESS;
 }
+/* 静态函数前置声明 */
+
+
+
+/* 静态函数 */
+
+
+/* 静态函数结束 */
+
 
 /* 通讯录初始化 */
 int contactsInit(Contacts **pContacts, 
                 int (*compareFunc)(ELEMENTTYPE val1, ELEMENTTYPE val2), 
                 int (*printFunc)(ELEMENTTYPE val))
 {
+    balanceBinarySearchTreeInit(pContacts, compareFunc, printFunc);
     return ON_SUCCESS;
 }
 
 /* 添加联系人 */
 int contactsAdd(Contacts *pContacts, ELEMENTTYPE val)
 {
+    balanceBinarySearchTreeInsert(pContacts, val);
     return ON_SUCCESS;
 }
 
-
-/* 删除联系人--指定号码 */
-int contactsDelAppointNumber(Contacts *pContacts, int delPhoneNumber)
+/* 查询联系人--指定号码--返回结点指针--修改联系人除号码以外的信息需要查询结点 */
+Person * contactsSearchAppointNumber(Contacts *pContacts, ELEMENTTYPE compareNode)
 {
-    return ON_SUCCESS;
+    Person * travelNode = pContacts->root;
+    int cmp = 0;
+    while (travelNode != NULL)
+    {
+        /* 比较大小 */
+        cmp = pContacts->compareFunc(compareNode, travelNode->data);
+        if (cmp < 0)
+        {
+            travelNode = travelNode->left;
+        }
+        else if (cmp > 0)
+        {
+            travelNode = travelNode->right;
+        }
+        else
+        {
+            /* 找到了. */
+            return travelNode;
+        }
+    }
+    return NULL;
 }
-
 
 /* 修改联系人--指定号码 */
-int contactsModAppointNumber(Contacts *pContacts, int delPhoneNumber, ELEMENTTYPE val)
+int contactsModAppointNumber(Contacts *pContacts, ELEMENTTYPE compareNode, ELEMENTTYPE newMessage)
 {
+    Person * modifyNode = contactsSearchAppointNumber(pContacts, compareNode);
+    Message *oldMessage = modifyNode->data;
+    modifyNode->data = newMessage;
+    FREE(oldMessage);
     return ON_SUCCESS;
 }
 
-
-/* 查询联系人--指定号码 */
-int contactsSearchAppointNumber(Contacts *pContacts, int delPhoneNumber)
+/* 删除联系人--指定号码 */
+int contactsDelAppointNumber(Contacts *pContacts, ELEMENTTYPE compareNode)
 {
+    balanceBinarySearchTreeDelete(pContacts, compareNode);
     return ON_SUCCESS;
 }
-
 
 /* 打印通讯录 */
 int contactsPrintAll(Contacts *pContacts)
 {
+    balanceBinarySearchTreeInOrderTravel(pContacts);
     return ON_SUCCESS;
 }
 
@@ -98,6 +131,7 @@ int contactsPrintAll(Contacts *pContacts)
 /* 删除通讯录 */
 int contactsPrintDel(Contacts *pContacts)
 {
+    balanceBinarySearchTreeDestroy(pContacts);
     return ON_SUCCESS;
 }
 
