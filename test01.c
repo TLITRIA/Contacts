@@ -27,7 +27,7 @@ enum COMMAND_CODE // 命令
 enum CONTACTS_STATUS_CODE
 {
     QUIT = -1,
-    NORMAL = 0,
+    NORMAL = 1,
 };
 
 int printMenu(void)
