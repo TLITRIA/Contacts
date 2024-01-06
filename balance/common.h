@@ -3,6 +3,15 @@
 
 #define ELEMENTTYPE void*
 
+enum ERROR_CODE
+{
+    NOT_FIND = -4,
+    INVALID_ACCESS,
+    NULL_PTR,
+    MALLOC_ERROR,
+    ON_SUCCESS,
+};
+
 /* 链表结点取别名*/
 typedef struct DoubleLinkNode
 {
